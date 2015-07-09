@@ -1,0 +1,152 @@
+	<@uploadImage />
+	<#macro uploadImage >
+	<form class="form-horizontal" method="post" action="jsp/admin/plugins/uploadimage/ManageOptions.jsp">
+		<input  type="hidden" name="action" id="action" value="${action!}"/>
+        <div class="">
+	<input  type="hidden" name="id_option" id="id_option" value="${option.id!}"/>
+          <button class="" id="toggleOptions" type="button" data-toggle="dropdown" aria-expanded="true">
+            Toggle OptistrActionons
+            <span class="caret"></span>
+          </button>
+          <ul class="" role="menu" aria-labelledby="toggleOptions">
+            <li role="presentation">
+              <label class="checkbox-inline">
+		
+                <input type="checkbox" name="strict" value="true" <#if option.strict> checked </#if> >
+                strict
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="responsive" value="true" <#if option.responsive> checked </#if> >
+                responsive
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="checkimageorigin" value="true" <#if option.checkImageOrigin> checked </#if> >
+                checkImageOrigin
+              </label>
+            </li>
+
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="modal" value="true" <#if option.modal> checked </#if>>
+                modal
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="guides" value="true" <#if option.guides> checked </#if>>
+                guides
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="highlight" value="true" <#if option.highlight> checked </#if>>
+                highlight
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="background" value="true" <#if option.background> checked </#if>>
+                background
+              </label>
+            </li>
+
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="autocrop" value="true" <#if option.autoCrop> checked </#if>>
+                autoCrop
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="dragcrop" value="true" <#if option.dragCrop> checked </#if>>
+                dragCrop
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="movable" value="true" <#if option.movable> checked </#if>>
+                movable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="rotatable" value="true" <#if option.rotatable> checked </#if>>
+                rotatable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="zoomable" value="true" <#if option.zoomable> checked </#if>>
+                zoomable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="touchdragzoom" value="true" <#if option.touchDragZoom> checked </#if>>
+                touchDragZoom
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="mousewheelzoom" value="true" <#if option.mouseWheelZoom> checked </#if>>
+                mouseWheelZoom
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="cropboxmovable" value="true" <#if option.cropBoxMovable> checked </#if>>
+                cropBoxMovable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="cropboxresizable" value="true" <#if option.cropBoxResizable> checked </#if>>
+                cropBoxResizable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="doubleclicktoggle" value="true" <#if option.doubleClickToggle> checked </#if>>
+                doubleClickToggle
+              </label>
+            </li>
+          </ul>
+        </div><!-- /.dropdown -->
+      </div><!-- /.docs-toggles -->
+ <!-- <h3 class="page-header">Data:</h3> -->
+        <div class="docs-data">
+          <div class="input-group">
+            <label class="input-group-addon" for="dataX">X</label>
+            <input class="form-control" id="dataX" type="text" placeholder="x" name="x" value="${option.x!}">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group">
+            <label class="input-group-addon" for="dataY">Y</label>
+            <input class="form-control" id="dataY"  type="text" placeholder="y" name="y" value="${option.y!}">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group">
+            <label class="input-group-addon" for="dataWidth">Width</label>
+            <input class="form-control" id="dataWidth" type="text" placeholder="width" name="width" value="${option.width!}">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group">
+            <label class="input-group-addon" for="dataHeight">Height</label>
+            <input class="form-control" id="dataHeight" type="text" placeholder="height" name="height" value="${option.height!}">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group">
+            <label class="input-group-addon" for="dataRotate">Rotate</label>
+            <input class="form-control" id="dataRotate" type="text" placeholder="rotate" name="rotate" value="${option.rotate!}">
+            <span class="input-group-addon">deg</span>
+          </div>
+        </div>
+    </div>
+  </div>
+   <input value="appliqu" type="submit"/>
+  </form>
+  </#macro>
