@@ -27,6 +27,7 @@ width int(11) NOT NULL default '0',
 height int(11) NOT NULL default '0',
 x int(11) NOT NULL default '0',
 y int(11) NOT NULL default '0',
-rotate varchar(50) NOT NULL default '',
+ratio varchar(50) NOT NULL default '',
+fieldName varchar(50) NOT NULL default '',
 PRIMARY KEY (id_options)
 );

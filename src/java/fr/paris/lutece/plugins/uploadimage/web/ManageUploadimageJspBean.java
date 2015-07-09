@@ -76,30 +76,30 @@ public  class ManageUploadimageJspBean extends MVCAdminJspBean
     private static final String INFO_OPTION_CREATED = "uploadimage.message.option.assigned";
     private static final String INFO_OPTION_UPDATE = "uploadimage.message.option.update";
     //Parameters
-    private static final String STRICT = "strict";
-    private static final String RESPONSIVE = "responsive";
-    private static final String CHECKIMAGEORIGIN = "checkimageorigin";
-    private static final String Modal = "modal";
-    private static final String GUIDES = "guides";
-    private static final String HIGHLIGHT = "highlight";
-    private static final String BACKGOUND = "background";
-    private static final String AUTOCROP = "autocrop";
-    private static final String DRAGCROP = "dragcrop";
-    private static final String MOVABLE = "movable";
-    private static final String ROTATABLE = "rotatable";
-    private static final String ZOOMABLE= "zoomable";
-    private static final String TOUCHDRAZOOM= "touchdragzoom";
-    private static final String MOUSEWHEELZOOM= "mousewheelzoom";
-    private static final String CROPBOXMOVABLE = "cropboxmovable";
-    private static final String CROPBOXRESIZABLE = "cropboxresizable";
-    private static final String DOUBLECLICKTOGGLE = "doubleclicktoggle";
-    private static final String WIDTH = "width";
-    private static final String HEIGHT = "height";
-    private static final String X = "x";
-    private static final String Y = "y";
-    private static final String ROTATE = "rotate";
-    
-    private static final String IDOPTION = "id_option";
+    private static final String PARAMETER_STRICT = "strict";
+    private static final String PARAMETER_RESPONSIVE = "responsive";
+    private static final String PARAMETER_CHECKIMAGEORIGIN = "checkimageorigin";
+    private static final String PARAMETER_Modal = "modal";
+    private static final String PARAMETER_GUIDES = "guides";
+    private static final String PARAMETER_HIGHLIGHT = "highlight";
+    private static final String PARAMETER_BACKGOUND = "background";
+    private static final String PARAMETER_AUTOCROP = "autocrop";
+    private static final String PARAMETER_DRAGCROP = "dragcrop";
+    private static final String PARAMETER_MOVABLE = "movable";
+    private static final String PARAMETER_ROTATABLE = "rotatable";
+    private static final String PARAMETER_ZOOMABLE= "zoomable";
+    private static final String PARAMETER_TOUCHDRAZOOM= "touchdragzoom";
+    private static final String PARAMETER_MOUSEWHEELZOOM= "mousewheelzoom";
+    private static final String PARAMETER_CROPBOXMOVABLE = "cropboxmovable";
+    private static final String PARAMETER_CROPBOXRESIZABLE = "cropboxresizable";
+    private static final String PARAMETER_DOUBLECLICKTOGGLE = "doubleclicktoggle";
+    private static final String PARAMETER_WIDTH = "width";
+    private static final String PARAMETER_HEIGHT = "height";
+    private static final String PARAMETER_X = "x";
+    private static final String PARAMETER_Y = "y";
+    private static final String PARAMETER_RATIO = "ratio";
+    private static final String PARAMATER_FIELDNAME = "fieldName";
+    private static final String PARAMETER_IDOPTION = "id_option";
 
     //Variables
     private int _nDefaultItemsPerPage;
@@ -162,32 +162,33 @@ public  class ManageUploadimageJspBean extends MVCAdminJspBean
    
    public String manageOptions( HttpServletRequest request ){
 	   
-	   boolean bStrict = Boolean.parseBoolean(request.getParameter(STRICT));
-	   boolean bResponsive = Boolean.parseBoolean(request.getParameter(RESPONSIVE));
-	   boolean bCheckImageOrigin = Boolean.parseBoolean(request.getParameter(CHECKIMAGEORIGIN));
-	   boolean bModal = Boolean.parseBoolean(request.getParameter(Modal));
-	   boolean bGuides = Boolean.parseBoolean(request.getParameter(GUIDES));
-	   boolean bHighlight = Boolean.parseBoolean(request.getParameter(HIGHLIGHT));
-	   boolean bBackground = Boolean.parseBoolean(request.getParameter(BACKGOUND));
-	   boolean bAutocrop = Boolean.parseBoolean(request.getParameter(AUTOCROP));
-	   boolean bDragCrop = Boolean.parseBoolean(request.getParameter(DRAGCROP));
-	   boolean bMovable = Boolean.parseBoolean(request.getParameter(MOVABLE));
-	   boolean bRotatable = Boolean.parseBoolean(request.getParameter(ROTATABLE));
-	   boolean bZoomable = Boolean.parseBoolean(request.getParameter(ZOOMABLE));
-	   boolean bTouchDragZoom = Boolean.parseBoolean(request.getParameter(TOUCHDRAZOOM));
-	   boolean bMouseWheelZoom = Boolean.parseBoolean(request.getParameter(MOUSEWHEELZOOM));
-	   boolean bCropBoxMovable = Boolean.parseBoolean(request.getParameter(CROPBOXMOVABLE));
-	   boolean bCropBoxResizable = Boolean.parseBoolean(request.getParameter(CROPBOXRESIZABLE));
-	   boolean bDoubleClickToggle = Boolean.parseBoolean(request.getParameter(DOUBLECLICKTOGGLE));
+	   boolean bStrict = Boolean.parseBoolean(request.getParameter(PARAMETER_STRICT));
+	   boolean bResponsive = Boolean.parseBoolean(request.getParameter(PARAMETER_RESPONSIVE));
+	   boolean bCheckImageOrigin = Boolean.parseBoolean(request.getParameter(PARAMETER_CHECKIMAGEORIGIN));
+	   boolean bModal = Boolean.parseBoolean(request.getParameter(PARAMETER_Modal));
+	   boolean bGuides = Boolean.parseBoolean(request.getParameter(PARAMETER_GUIDES));
+	   boolean bHighlight = Boolean.parseBoolean(request.getParameter(PARAMETER_HIGHLIGHT));
+	   boolean bBackground = Boolean.parseBoolean(request.getParameter(PARAMETER_BACKGOUND));
+	   boolean bAutocrop = Boolean.parseBoolean(request.getParameter(PARAMETER_AUTOCROP));
+	   boolean bDragCrop = Boolean.parseBoolean(request.getParameter(PARAMETER_DRAGCROP));
+	   boolean bMovable = Boolean.parseBoolean(request.getParameter(PARAMETER_MOVABLE));
+	   boolean bRotatable = Boolean.parseBoolean(request.getParameter(PARAMETER_ROTATABLE));
+	   boolean bZoomable = Boolean.parseBoolean(request.getParameter(PARAMETER_ZOOMABLE));
+	   boolean bTouchDragZoom = Boolean.parseBoolean(request.getParameter(PARAMETER_TOUCHDRAZOOM));
+	   boolean bMouseWheelZoom = Boolean.parseBoolean(request.getParameter(PARAMETER_MOUSEWHEELZOOM));
+	   boolean bCropBoxMovable = Boolean.parseBoolean(request.getParameter(PARAMETER_CROPBOXMOVABLE));
+	   boolean bCropBoxResizable = Boolean.parseBoolean(request.getParameter(PARAMETER_CROPBOXRESIZABLE));
+	   boolean bDoubleClickToggle = Boolean.parseBoolean(request.getParameter(PARAMETER_DOUBLECLICKTOGGLE));
 	 
-	   int nWidth = Integer.parseInt(request.getParameter(WIDTH));
-	   int nHeight = Integer.parseInt(request.getParameter(HEIGHT));
-	   int nX = Integer.parseInt(request.getParameter(X));
-	   int nY = Integer.parseInt(request.getParameter(Y));
+	   int nWidth = Integer.parseInt(request.getParameter(PARAMETER_WIDTH));
+	   int nHeight = Integer.parseInt(request.getParameter(PARAMETER_HEIGHT));
+	   int nX = Integer.parseInt(request.getParameter(PARAMETER_X));
+	   int nY = Integer.parseInt(request.getParameter(PARAMETER_Y));
 	   
-	   String strId = request.getParameter(IDOPTION);
+	   String strId = request.getParameter(PARAMETER_IDOPTION);
 	   
-	   String strRotate = request.getParameter(ROTATE);
+	   String strRatio = request.getParameter(PARAMETER_RATIO);
+	   String strFieldName = request.getParameter(PARAMATER_FIELDNAME);
 	   
 	   String action= request.getParameter("action");
 	   
@@ -215,7 +216,8 @@ public  class ManageUploadimageJspBean extends MVCAdminJspBean
 	   option.setWidth(nWidth);
 	   option.setX(nX);
 	   option.setY(nY);
-	   option.setRotate(strRotate);
+	   option.setRatio(strRatio);
+	   option.setFieldName(strFieldName);
 	   
 	   if(action.equals("modify_option")){
 		   option.setId(Integer.parseInt(strId));
@@ -240,12 +242,18 @@ public  class ManageUploadimageJspBean extends MVCAdminJspBean
   
    public String getViewOptions ( HttpServletRequest request ){
 	   
-	   String nKey= request.getParameter(IDOPTION);
+	   String nKey= request.getParameter(PARAMETER_IDOPTION);
 	   String strAction= request.getParameter("action");
 	   Options option= new Options( );
 	   if(nKey != null){
 		   option=OptionsHome.findByPrimaryKey(Integer.parseInt(nKey));
 		  
+	   }else{
+		   option.setHeight(576);
+		   option.setWidth(1024);
+		   option.setX(128);
+		   option.setY(72);
+		   option.setRatio("16/9");   
 	   }
 	   Map<String, Object> model = getModel(  );
 	   model.put("option", option);  
@@ -264,9 +272,9 @@ public  class ManageUploadimageJspBean extends MVCAdminJspBean
     */
    public String getConfirmRemoveOption( HttpServletRequest request )
    {
-	   String nKey= request.getParameter(IDOPTION);
+	   String nKey= request.getParameter(PARAMETER_IDOPTION);
 	   UrlItem url = new UrlItem( JSP_DO_REMOVE_OPTION );
-       url.addParameter( IDOPTION, nKey );
+       url.addParameter( PARAMETER_IDOPTION, nKey );
        
        return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_OPTION, url.getUrl(  ),
                AdminMessage.TYPE_CONFIRMATION );
@@ -275,7 +283,7 @@ public  class ManageUploadimageJspBean extends MVCAdminJspBean
    
    public String removeOptions ( HttpServletRequest request ){
 	   
-	   String nKey= request.getParameter(IDOPTION);
+	   String nKey= request.getParameter(PARAMETER_IDOPTION);
 	   if(nKey != null){
 		   OptionsHome.remove(Integer.parseInt(nKey));	  
 	   }

@@ -102,6 +102,16 @@ public final class OptionsHome
     {
         return _dao.load( nKey, _plugin);
     }
+    
+    /**
+     * Returns an instance of a options whose field name is specified in parameter
+     * @param nKey The options primary key
+     * @return an instance of Options
+     */
+    public static Options findByFieldName( String fieldName )
+    {
+        return _dao.loadOptionByFieldName(fieldName, _plugin);
+    }
 
     /**
      * Load the data of all the options objects and returns them in form of a collection

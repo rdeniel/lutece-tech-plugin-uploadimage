@@ -87,17 +87,17 @@ public class UploadimageApp extends MVCApplication
     
     {
     	
-    	String nId = request.getParameter(IDOPTION);
+    	//String nId = request.getParameter(IDOPTION);
     	String strFieldname = request.getParameter(PARAMATER_FIELDNAME);
     	Options option= new Options( );
     	
- 	   if(nId != null){
- 		   option=OptionsHome.findByPrimaryKey(Integer.parseInt(nId));  
+ 	   if(strFieldname != null){
+ 		   option=OptionsHome.findByFieldName(strFieldname);  
  	   }else{
  		   option= getDefaultOption(	);
  	   }
    
-    	 String strKey = "raf";
+    	 String strKey = "clef";
     	
     	 String strContent = (String) UploadImageCacheService.getInstance(  ).getFromCache( strKey );
        
@@ -111,7 +111,7 @@ public class UploadimageApp extends MVCApplication
 	    	 
 	         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MAIN_UPLOAD_IMAGE_JS, request.getLocale(  ),
 	                    model );
-	            strContent = template.getHtml(  );
+	         strContent = template.getHtml(  );
 	      //      UploadImageCacheService.getInstance(  ).putInCache( strKey, strContent );
         //}
 
@@ -141,10 +141,11 @@ public class UploadimageApp extends MVCApplication
   	   option.setCropBoxResizable(true);
   	   
   	   option.setHeight(576);
-  	   option.setWidth(124);
+  	   option.setWidth(1024);
   	   option.setX(128);
   	   option.setY(72);
-  	   option.setRotate("0");
+  	   option.setRatio("16/9");
+  	   option.setFieldName("fieldName");
   	   
   	   return option;
     	

@@ -88,7 +88,10 @@ public class Options
     private int _nY;
     
     @Size( max = 50 , message = "#i18n{uploadimage.validation.options.Rotate.size}" ) 
-    private String _strRotate;
+    private String _strRatio;
+    
+    @Size( max = 50 , message = "#i18n{uploadimage.validation.options.Rotate.size}" ) 
+    private String _strFieldName;
 
     /**
      * Returns the Id
@@ -469,17 +472,36 @@ public class Options
      * Returns the Rotate
      * @return The Rotate
      */
-    public String getRotate( )
+    public String getRatio( )
     {
-        return _strRotate;
+        return _strRatio;
     }
 
     /**
      * Sets the Rotate
      * @param strRotate The Rotate
      */ 
-    public void setRotate( String strRotate )
+    public void setRatio( String strRatio )
     {
-        _strRotate = strRotate;
+    	_strRatio = strRatio;
     }
+    
+    /**
+     * Returns the FieldName
+     * @return The FieldName
+     */
+    public String getFieldName( )
+    {
+        return _strFieldName;
+    }
+
+    /**
+     * Sets the FieldName
+     * @param strRotate The FieldName
+     */ 
+    public void setFieldName( String fieldName )
+    {
+    	_strFieldName = fieldName;
+    }
+   
 }

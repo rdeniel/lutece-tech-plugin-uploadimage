@@ -72,7 +72,7 @@ $(function () {
          //  zoomin: null,
          //  zoomout: null,
 
-          aspectRatio: 16 / 9,
+          aspectRatio: ${option.ratio},
           preview: '.img-preview${fieldName}',
           crop: function (data) {
             $dataX.val(Math.round(data.x));
@@ -244,3 +244,10 @@ $(function () {
   }());
 
 });
+
+function deletes(){
+
+	$('#imagesrc${fieldName}').val( );
+	$('#canvasImage${fieldName}').html('');
+	$('#deleteButton${fieldName}').hide();
+}

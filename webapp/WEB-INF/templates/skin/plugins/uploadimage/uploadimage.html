@@ -46,6 +46,7 @@
 	<div class="">
 		<input id="imagesrc${fieldName}" name=${fieldName} type="hidden" value="" />
 		 <div class="modal-body" >
+		 	<button id="deleteButton${fieldName}" class="glyphicon glyphicon-remove-circle"onclick="deletes()" style="display:none">Delete</button>
 			<div id="canvasImage${fieldName}"></div>
 		 </div>
 	</div>
@@ -93,7 +94,7 @@
               <span class="icon icon-crop"></span>
             </span>
           </button>
-          <button  class="btn btn-primary" data-method="zoomb" data-option="0.1" type="button" title="Zoom In">
+          <button  class="btn btn-primary" data-method="zoom" data-option="0.1" type="button" title="Zoom In">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)">
               <span class="icon icon-zoom-in"></span>
             </span>

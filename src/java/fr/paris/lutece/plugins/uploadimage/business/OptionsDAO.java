@@ -49,13 +49,14 @@ public final class OptionsDAO implements IOptionsDAO
 {
     // Constants
     private static final String SQL_QUERY_NEW_PK = "SELECT max( id_options ) FROM uploadimage_options";
-    private static final String SQL_QUERY_SELECT = "SELECT id_options, strict, responsive, checkImageOrigin, modal, guides, highlight, background, autoCrop, dragCrop, movable, rotatable, zoomable, touchDragZoom, mouseWheelZoom, cropBoxMovable, cropBoxResizable, doubleClickToggle, width, height, x, y, rotate FROM uploadimage_options WHERE id_options = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO uploadimage_options ( id_options, strict, responsive, checkImageOrigin, modal, guides, highlight, background, autoCrop, dragCrop, movable, rotatable, zoomable, touchDragZoom, mouseWheelZoom, cropBoxMovable, cropBoxResizable, doubleClickToggle, width, height, x, y, rotate ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_options, strict, responsive, checkImageOrigin, modal, guides, highlight, background, autoCrop, dragCrop, movable, rotatable, zoomable, touchDragZoom, mouseWheelZoom, cropBoxMovable, cropBoxResizable, doubleClickToggle, width, height, x, y, ratio, fieldName FROM uploadimage_options WHERE id_options = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO uploadimage_options ( id_options, strict, responsive, checkImageOrigin, modal, guides, highlight, background, autoCrop, dragCrop, movable, rotatable, zoomable, touchDragZoom, mouseWheelZoom, cropBoxMovable, cropBoxResizable, doubleClickToggle, width, height, x, y, ratio, fieldName ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM uploadimage_options WHERE id_options = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE uploadimage_options SET id_options = ?, strict = ?, responsive = ?, checkImageOrigin = ?, modal = ?, guides = ?, highlight = ?, background = ?, autoCrop = ?, dragCrop = ?, movable = ?, rotatable = ?, zoomable = ?, touchDragZoom = ?, mouseWheelZoom = ?, cropBoxMovable = ?, cropBoxResizable = ?, doubleClickToggle = ?, width = ?, height = ?, x = ?, y = ?, rotate = ? WHERE id_options = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_options, strict, responsive, checkImageOrigin, modal, guides, highlight, background, autoCrop, dragCrop, movable, rotatable, zoomable, touchDragZoom, mouseWheelZoom, cropBoxMovable, cropBoxResizable, doubleClickToggle, width, height, x, y, rotate FROM uploadimage_options";
+    private static final String SQL_QUERY_UPDATE = "UPDATE uploadimage_options SET id_options = ?, strict = ?, responsive = ?, checkImageOrigin = ?, modal = ?, guides = ?, highlight = ?, background = ?, autoCrop = ?, dragCrop = ?, movable = ?, rotatable = ?, zoomable = ?, touchDragZoom = ?, mouseWheelZoom = ?, cropBoxMovable = ?, cropBoxResizable = ?, doubleClickToggle = ?, width = ?, height = ?, x = ?, y = ?, ratio = ?, fieldName = ? WHERE id_options = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_options, strict, responsive, checkImageOrigin, modal, guides, highlight, background, autoCrop, dragCrop, movable, rotatable, zoomable, touchDragZoom, mouseWheelZoom, cropBoxMovable, cropBoxResizable, doubleClickToggle, width, height, x, y, ratio, fieldName FROM uploadimage_options";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_options FROM uploadimage_options";
-
+    private static final String SQL_QUERY_SELECT_FIELDNAME = "SELECT id_options, strict, responsive, checkImageOrigin, modal, guides, highlight, background, autoCrop, dragCrop, movable, rotatable, zoomable, touchDragZoom, mouseWheelZoom, cropBoxMovable, cropBoxResizable, doubleClickToggle, width, height, x, y, ratio, fieldName FROM uploadimage_options u WHERE u.fieldName = ?";
+    
     /**
      * Generates a new primary key
      * @param plugin The Plugin
@@ -110,8 +111,9 @@ public final class OptionsDAO implements IOptionsDAO
         daoUtil.setInt( 20, options.getHeight( ) );
         daoUtil.setInt( 21, options.getX( ) );
         daoUtil.setInt( 22, options.getY( ) );
-        daoUtil.setString( 23, options.getRotate( ) );
-
+        daoUtil.setString( 23, options.getRatio( ) );
+        daoUtil.setString( 24, options.getFieldName( ) );
+        
         daoUtil.executeUpdate( );
         daoUtil.free( );
     }
@@ -153,7 +155,8 @@ public final class OptionsDAO implements IOptionsDAO
             options.setHeight( daoUtil.getInt( 20 ) );
             options.setX( daoUtil.getInt( 21 ) );
             options.setY( daoUtil.getInt( 22 ) );
-            options.setRotate( daoUtil.getString( 23 ) );
+            options.setRatio( daoUtil.getString( 23 ) );
+            options.setFieldName( daoUtil.getString( 24 ) );
         }
 
         daoUtil.free( );
@@ -202,8 +205,9 @@ public final class OptionsDAO implements IOptionsDAO
         daoUtil.setInt( 20, options.getHeight( ) );
         daoUtil.setInt( 21, options.getX( ) );
         daoUtil.setInt( 22, options.getY( ) );
-        daoUtil.setString( 23, options.getRotate( ) );
-        daoUtil.setInt( 24, options.getId( ) );
+        daoUtil.setString( 23, options.getRatio( ) );
+        daoUtil.setString( 24, options.getFieldName( ) );
+        daoUtil.setInt( 25, options.getId( ) );
 
         daoUtil.executeUpdate( );
         daoUtil.free( );
@@ -224,28 +228,29 @@ public final class OptionsDAO implements IOptionsDAO
             Options options = new Options(  );
             
             options.setId( daoUtil.getInt( 1 ) );
-                options.setStrict( daoUtil.getBoolean( 2 ) );
-                options.setResponsive( daoUtil.getBoolean( 3 ) );
-                options.setCheckImageOrigin( daoUtil.getBoolean( 4 ) );
-                options.setModal( daoUtil.getBoolean( 5 ) );
-                options.setGuides( daoUtil.getBoolean( 6 ) );
-                options.setHighlight( daoUtil.getBoolean( 7 ) );
-                options.setBackground( daoUtil.getBoolean( 8 ) );
-                options.setAutoCrop( daoUtil.getBoolean( 9 ) );
-                options.setDragCrop( daoUtil.getBoolean( 10 ) );
-                options.setMovable( daoUtil.getBoolean( 11 ) );
-                options.setRotatable( daoUtil.getBoolean( 12 ) );
-                options.setZoomable( daoUtil.getBoolean( 13 ) );
-                options.setTouchDragZoom( daoUtil.getBoolean( 14 ) );
-                options.setMouseWheelZoom( daoUtil.getBoolean( 15 ) );
-                options.setCropBoxMovable( daoUtil.getBoolean( 16 ) );
-                options.setCropBoxResizable( daoUtil.getBoolean( 17 ) );
-                options.setDoubleClickToggle( daoUtil.getBoolean( 18 ) );
-                options.setWidth( daoUtil.getInt( 19 ) );
-                options.setHeight( daoUtil.getInt( 20 ) );
-                options.setX( daoUtil.getInt( 21 ) );
-                options.setY( daoUtil.getInt( 22 ) );
-                options.setRotate( daoUtil.getString( 23 ) );
+            options.setStrict( daoUtil.getBoolean( 2 ) );
+            options.setResponsive( daoUtil.getBoolean( 3 ) );
+            options.setCheckImageOrigin( daoUtil.getBoolean( 4 ) );
+            options.setModal( daoUtil.getBoolean( 5 ) );
+            options.setGuides( daoUtil.getBoolean( 6 ) );
+            options.setHighlight( daoUtil.getBoolean( 7 ) );
+            options.setBackground( daoUtil.getBoolean( 8 ) );
+            options.setAutoCrop( daoUtil.getBoolean( 9 ) );
+            options.setDragCrop( daoUtil.getBoolean( 10 ) );
+            options.setMovable( daoUtil.getBoolean( 11 ) );
+            options.setRotatable( daoUtil.getBoolean( 12 ) );
+            options.setZoomable( daoUtil.getBoolean( 13 ) );
+            options.setTouchDragZoom( daoUtil.getBoolean( 14 ) );
+            options.setMouseWheelZoom( daoUtil.getBoolean( 15 ) );
+            options.setCropBoxMovable( daoUtil.getBoolean( 16 ) );
+            options.setCropBoxResizable( daoUtil.getBoolean( 17 ) );
+            options.setDoubleClickToggle( daoUtil.getBoolean( 18 ) );
+            options.setWidth( daoUtil.getInt( 19 ) );
+            options.setHeight( daoUtil.getInt( 20 ) );
+            options.setX( daoUtil.getInt( 21 ) );
+            options.setY( daoUtil.getInt( 22 ) );
+            options.setRatio( daoUtil.getString( 23 ) );
+            options.setFieldName(daoUtil.getString( 24 ) );
 
             optionsList.add( options );
         }
@@ -272,4 +277,50 @@ public final class OptionsDAO implements IOptionsDAO
             daoUtil.free( );
             return optionsList;
     }
+    
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public Options loadOptionByFieldName( String fieldName, Plugin plugin )
+    {
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_FIELDNAME, plugin );
+        daoUtil.setString( 1 , fieldName );
+        daoUtil.executeQuery( );
+
+        Options options = null;
+
+        if ( daoUtil.next( ) )
+        {
+            options = new Options();
+            options.setId( daoUtil.getInt( 1 ) );
+            options.setStrict( daoUtil.getBoolean( 2 ) );
+            options.setResponsive( daoUtil.getBoolean( 3 ) );
+            options.setCheckImageOrigin( daoUtil.getBoolean( 4 ) );
+            options.setModal( daoUtil.getBoolean( 5 ) );
+            options.setGuides( daoUtil.getBoolean( 6 ) );
+            options.setHighlight( daoUtil.getBoolean( 7 ) );
+            options.setBackground( daoUtil.getBoolean( 8 ) );
+            options.setAutoCrop( daoUtil.getBoolean( 9 ) );
+            options.setDragCrop( daoUtil.getBoolean( 10 ) );
+            options.setMovable( daoUtil.getBoolean( 11 ) );
+            options.setRotatable( daoUtil.getBoolean( 12 ) );
+            options.setZoomable( daoUtil.getBoolean( 13 ) );
+            options.setTouchDragZoom( daoUtil.getBoolean( 14 ) );
+            options.setMouseWheelZoom( daoUtil.getBoolean( 15 ) );
+            options.setCropBoxMovable( daoUtil.getBoolean( 16 ) );
+            options.setCropBoxResizable( daoUtil.getBoolean( 17 ) );
+            options.setDoubleClickToggle( daoUtil.getBoolean( 18 ) );
+            options.setWidth( daoUtil.getInt( 19 ) );
+            options.setHeight( daoUtil.getInt( 20 ) );
+            options.setX( daoUtil.getInt( 21 ) );
+            options.setY( daoUtil.getInt( 22 ) );
+            options.setRatio( daoUtil.getString( 23 ) );
+            options.setFieldName( daoUtil.getString( 24 ) );
+        }
+
+        daoUtil.free( );
+        return options;
+    }
+
 }

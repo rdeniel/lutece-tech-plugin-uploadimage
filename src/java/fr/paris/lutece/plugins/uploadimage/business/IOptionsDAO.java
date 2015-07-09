@@ -36,6 +36,7 @@
 package fr.paris.lutece.plugins.uploadimage.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
+
 import java.util.Collection;
 
 
@@ -76,7 +77,15 @@ public interface IOptionsDAO
      * @return The instance of the options
      */
     Options load( int nKey, Plugin plugin );
-
+    
+    /**
+     * Load the data from the table
+     * @param fieldName The identifier of the options
+     * @param plugin the Plugin
+     * @return The instance of the options
+     */
+    
+    Options loadOptionByFieldName( String fieldName, Plugin plugin );
     /**
      * Load the data of all the options objects and returns them as a collection
      * @param plugin the Plugin
