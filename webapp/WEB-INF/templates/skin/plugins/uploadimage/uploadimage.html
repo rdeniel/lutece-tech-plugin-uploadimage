@@ -1,6 +1,7 @@
 
 
-<#macro cropimage  fieldName>
+<#macro cropimage  fieldName	file  cssClass >
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,26 +31,32 @@
     <div class="row">
       <div class="col-md-9">
         <!-- <h3 class="page-header">Demo:</h3> -->
+
         <div class="img-container${fieldName}">
-          <image src="images/admin/skin/plugins/uploadimage/picture.jpg" alt="Picture" style="  width: 1200px; height: auto; max-width: 500px;">
+          <image src="${file!}" alt="" class="cssClass">
         </div>
       </div>
       <div class="col-md-3">
-        <!-- <h3 class="page-header">Preview:</h3> -->
-      <!--  <div class="docs-preview clearfix">
-          <div class="img-preview${fieldName} preview-lg"></div>
-          <div class="img-preview${fieldName} preview-md"></div>
-          <div class="img-preview${fieldName} preview-sm"></div>
-          <div class="img-preview${fieldName} preview-xs"></div>
-        </div> -->
+        <!-- <h3 class="page-header">Preview:</h3> 
+        <div class="docs-preview clearfix">
+          <div class="img-preview preview-lg"></div>
+          <div class="img-preview preview-md"></div>
+          <div class="img-preview preview-sm"></div>
+          <div class="img-preview preview-xs"></div>
+        </div> 
 	<!-- Show the cropped image in input -->
-	<div class="">
-		<input id="imagesrc${fieldName}" name=${fieldName} type="hidden" value="" />
-		 <div class="modal-body" >
-		 	<button id="deleteButton${fieldName}" class="glyphicon glyphicon-remove-circle"onclick="deletes()" style="display:none">Delete</button>
+
+
+	<div class="dd">
+			<input id="imagesrc${fieldName}" name=${fieldName} type="hidden" value="" />	
+			<button id="deleteButton${fieldName}" class="" data-method="deleteImage" data-option="" type="button" title="delete" style="display:none">
+             		 		<span class="glyphicon glyphicon-remove-circle"></span>delete
+          		</button>
+
 			<div id="canvasImage${fieldName}"></div>
-		 </div>
+			
 	</div>
+	
         <!-- <h3 class="page-header">Data:</h3> -->
      <!--   <div class="docs-data">
           <div class="input-group">
@@ -81,9 +88,11 @@
       </div>-->
     </div>
     <div class="row">
-      <div class="col-md-9 docs-buttons">
+      <div id= "buttonOption${fieldName}" class="col-md-9 docs-buttons" <#if file =="" > style='display:none' </#if>>
         <!-- <h3 class="page-header">Toolbar:</h3> -->
-        <div class="btn-group">
+	
+        <div id="buttonOption" class="btn-group" >
+	
           <button class="btn btn-primary" data-method="setDragMode" data-option="move" type="button" title="Move">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
               <span class="icon icon-move"></span>
@@ -115,7 +124,7 @@
             </span>
           </button>
         </div>
-
+	
         <div class="btn-group">
           <button class="btn btn-primary" data-method="crop" type="button" title="Crop">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;crop&quot;)">
@@ -154,7 +163,7 @@
             </span>
           </button>
         </div>
-
+	
         <div class="btn-group btn-group-crop">
           <button class="btn btn-primary" data-method="getCroppedCanvas" type="button">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper${fieldName}(&quot;getCroppedCanvas&quot;)">
@@ -173,7 +182,9 @@
           </button>
         </div>
 	
-        <div class="modal fade docs-cropped" id="getCroppedCanvasModal${fieldName}" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+	
+
+    <!--    <div class="modal fade docs-cropped" id="getCroppedCanvasModal${fieldName}" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -181,12 +192,12 @@
                 <h4 class="modal-title" id="getCroppedCanvasTitle${fieldName}">Cropped</h4>
               </div>
               <div class="modal-body"></div>
-              <!-- <div class="modal-footer">
+               <div class="modal-footer">
                 <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-              </div> -->
+              </div> 
             </div>
           </div>
-        </div><!-- /.modal -->
+        </div> --><!-- /.modal -->
 <!--
         <button class="btn btn-primary" data-method="getData" data-option="" data-target="#putData" type="button">
           <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getData&quot;)">
@@ -232,6 +243,8 @@
 	
         <!-- Show the cropped image in modal -->
       </div><!-- /.docs-buttons -->
+
+	
 
       <div class="col-md-3 docs-toggles">
         <!-- <h3 class="page-header">Toggles:</h3> -->
@@ -383,6 +396,12 @@
       </div><!-- /.docs-toggles -->
     </div>
   </div>
+ <label id="label${fieldName}" class="btn btn-primary btn-upload" for="inputImage${fieldName}" title="Upload image file" <#if file !="" > style='display:none' </#if>>
+            <input class="sr-only" id="inputImage${fieldName}" name="file" type="file" accept="image/*">
+            <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
+              <span class="icon icon-upload"></span>upload 
+            </span>
+ </label>
 
   <!-- Alert -->
   <div class="docs-alert"><span class="warning message"></span></div>
