@@ -109,7 +109,7 @@ public class OptionsBusinessTest extends LuteceTestCase
         options.setHeight( HEIGHT1 );
         options.setX( X1 );
         options.setY( Y1 );
-        options.setRotate( ROTATE1 );
+        options.setRatio( ROTATE1 );
 
         // Create test
         OptionsHome.create( options );
@@ -135,7 +135,7 @@ public class OptionsBusinessTest extends LuteceTestCase
         assertEquals( optionsStored.getHeight() , options.getHeight( ) );
         assertEquals( optionsStored.getX() , options.getX( ) );
         assertEquals( optionsStored.getY() , options.getY( ) );
-        assertEquals( optionsStored.getRotate() , options.getRotate( ) );
+        assertEquals( optionsStored.getRatio() , options.getRatio( ) );
 
         // Update test
         options.setStrict( STRICT2 );
@@ -159,7 +159,7 @@ public class OptionsBusinessTest extends LuteceTestCase
         options.setHeight( HEIGHT2 );
         options.setX( X2 );
         options.setY( Y2 );
-        options.setRotate( ROTATE2 );
+        options.setRatio( ROTATE2 );
         OptionsHome.update( options );
         optionsStored = OptionsHome.findByPrimaryKey( options.getId( ) );
         assertEquals( optionsStored.getStrict() , options.getStrict( ) );
@@ -183,7 +183,7 @@ public class OptionsBusinessTest extends LuteceTestCase
         assertEquals( optionsStored.getHeight() , options.getHeight( ) );
         assertEquals( optionsStored.getX() , options.getX( ) );
         assertEquals( optionsStored.getY() , options.getY( ) );
-        assertEquals( optionsStored.getRotate() , options.getRotate( ) );
+        assertEquals( optionsStored.getRatio() , options.getRatio( ) );
 
         // List test
         OptionsHome.getOptionssList();
