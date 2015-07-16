@@ -1,6 +1,4 @@
 
-
-
 $(function () {
 
   'use strict';
@@ -38,6 +36,7 @@ $(function () {
              width: ${option.width},
              height: ${option.height}
            },
+	 
            strict: ${option.strict?c},
            responsive: ${option.responsive?c},
            checkImageOrigin: ${option.checkImageOrigin?c},
@@ -146,11 +145,15 @@ $(function () {
 	      $('#deleteButton${fieldName}').hide();
 	      exit();
 	}
+		
         if (data.method === 'getCroppedCanvas') {
+		
          // $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+
 		$('#imagesrc${fieldName}').val(result.toDataURL());
 		$('#canvasImage${fieldName}').html(result);
 		$('#deleteButton${fieldName}').show();
+		
 		//exit();
         }
 
@@ -161,7 +164,7 @@ $(function () {
 	 || data.method === 'reset' || data.method === 'destroy') {
 		//exit();
         }
-
+	
         if ($.isPlainObject(result) && $target) {
           try {
             $target.val(JSON.stringify(result));
@@ -209,34 +212,41 @@ $(function () {
 
     if (URL) {
       $inputImage.change(function () {
+	
 	$('#label${fieldName}').hide();
 	$('#buttonOption${fieldName}').show();
-
+	
         var files = this.files,
             file;
 
         if (!$image.data('cropper')) {
           return;
         }
-
+	
         if (files && files.length) {
           file = files[0];
+	 
 
           if (/^image\/\w+$/.test(file.type)) {
             blobURL = URL.createObjectURL(file);
             $image.one('built.cropper', function () {
               URL.revokeObjectURL(blobURL); // Revoke when load complete
+		
             }).cropper('reset').cropper('replace', blobURL);
+	    
             $inputImage.val('');
           } else {
             showMessage('Please choose an image file.');
           }
+	   
         }
       });
+	
+	
     } else {
       $inputImage.parent().remove();
     }
-
+    
 
     // Options
     $('.docs-options :checkbox').on('change', function () {
@@ -255,6 +265,8 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
   }());
+
+ 
 
 });
 

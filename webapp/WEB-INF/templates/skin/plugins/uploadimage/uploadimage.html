@@ -1,6 +1,11 @@
 
+<#macro addRequiredJsUploadImages>
+	<link rel="stylesheet" href="css/plugins/uploadimage/main.css" />
+	<link rel="stylesheet" href="css/plugins/uploadimage/cropper.css" />
+	<script type="text/javascript" src="js/plugins/uploadimage/cropper.js" ></script>
+</#macro>
 
-<#macro cropimage  fieldName	file  cssClass >
+<#macro cropimage  fieldName	file  cssClass synchronous >
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,40 +52,44 @@
 	<!-- Show the cropped image in input -->
 
 
-	<div class="dd">
+	<div>
 			<input id="imagesrc${fieldName}" name=${fieldName} type="hidden" value="" />	
 			<button id="deleteButton${fieldName}" class="" data-method="deleteImage" data-option="" type="button" title="delete" style="display:none">
              		 		<span class="glyphicon glyphicon-remove-circle"></span>delete
           		</button>
 
-			<div id="canvasImage${fieldName}"></div>
-			
+			<div id="canvasImage${fieldName}"></div>	
 	</div>
 	
-        <!-- <h3 class="page-header">Data:</h3> -->
-     <!--   <div class="docs-data">
+        <!-- <h3 class="page-header">Data:</h3> 
+      <div class="docs-data">
           <div class="input-group">
             <label class="input-group-addon" for="dataX${fieldName}">X</label>
+
             <input class="form-control" id="dataX${fieldName}" type="text" placeholder="x">
             <span class="input-group-addon">px</span>
           </div>
           <div class="input-group">
             <label class="input-group-addon" for="dataY${fieldName}">Y</label>
+
             <input class="form-control" id="dataY${fieldName}" type="text" placeholder="y">
             <span class="input-group-addon">px</span>
           </div>
           <div class="input-group">
             <label class="input-group-addon" for="dataWidt${fieldName}h">Width</label>
+
             <input class="form-control" id="dataWidth${fieldName}" type="text" placeholder="width">
             <span class="input-group-addon">px</span>
           </div>
           <div class="input-group">
             <label class="input-group-addon" for="dataHeight${fieldName}">Height</label>
+
             <input class="form-control" id="dataHeight${fieldName}" type="text" placeholder="height">
             <span class="input-group-addon">px</span>
           </div>
           <div class="input-group">
             <label class="input-group-addon" for="dataRotate${fieldName}">Rotate</label>
+
             <input class="form-control" id="dataRotate${fieldName}" type="text" placeholder="rotate">
             <span class="input-group-addon">deg</span>
           </div>
@@ -165,12 +174,12 @@
         </div>
 	
         <div class="btn-group btn-group-crop">
-          <button class="btn btn-primary" data-method="getCroppedCanvas" type="button">
+          <button  class="btn btn-primary" data-method="getCroppedCanvas" type="button">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper${fieldName}(&quot;getCroppedCanvas&quot;)">
               Get Cropped Canvas
             </span>
           </button>
-          <button class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }" type="button">
+          <button id="id_crop_canvas" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }" type="button">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;, { width: 160, height: 90 })">
               160&times;90
             </span>
@@ -201,6 +210,7 @@
 <!--
         <button class="btn btn-primary" data-method="getData" data-option="" data-target="#putData" type="button">
           <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getData&quot;)">
+
             Get Data
           </span>
         </button>
@@ -211,11 +221,13 @@
         </button>
         <button class="btn btn-primary" data-method="getContainerData" data-option="" data-target="#putData" type="button">
           <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getContainerData&quot;)">
+
             Get Container Data
           </span>
         </button>
         <button class="btn btn-primary" data-method="getImageData" data-option="" data-target="#putData" type="button">
           <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getImageData&quot;)">
+
             Get Image Data
           </span>
         </button>
@@ -231,6 +243,7 @@
         </button>
         <button class="btn btn-primary" data-method="getCropBoxData" data-option="" data-target="#putData" type="button">
           <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCropBoxData&quot;)">
+
             Get Crop Box Data
           </span>
         </button>
@@ -247,8 +260,8 @@
 	
 
       <div class="col-md-3 docs-toggles">
-        <!-- <h3 class="page-header">Toggles:</h3> -->
-     <!--   <div class="btn-group btn-group-justified" data-toggle="buttons">
+        <!-- <h3 class="page-header">Toggles:</h3> 
+   	 <div class="btn-group btn-group-justified" data-toggle="buttons">
           <label class="btn btn-primary active" data-method="setAspectRatio" data-option="1.7777777777777777" title="Set Aspect Ratio">
             <input class="sr-only" id="aspestRatio1${fieldName}" name="aspestRatio" value="1.7777777777777777" type="radio">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 16 / 9)">
@@ -256,6 +269,7 @@
             </span>
           </label>
           <label class="btn btn-primary" data-method="setAspectRatio" data-option="1.3333333333333333" title="Set Aspect Ratio">
+
             <input class="sr-only" id="aspestRatio2${fieldName}" name="aspestRatio" value="1.3333333333333333" type="radio">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 4 / 3)">
               4:3
@@ -407,8 +421,20 @@
   <div class="docs-alert"><span class="warning message"></span></div>
 
   <!-- Scripts -->
-<script type="text/javascript" src="jsp/site/plugins/uploadimage/GetMainUploadJs.jsp?id_option=2&fieldName=${fieldName}" ></script>
+<script type="text/javascript" src="jsp/site/plugins/uploadimage/GetMainUploadJs.jsp?fieldName=${fieldName}" ></script>
 	
 </body>
 </html>
+
+<script type="text/javascript">
+$(function () {
+ 	'use strict';
+	if('${synchronous}'==="true" && "${file}" != ""){
+		$('#imagesrc${fieldName}').val("${file}");
+		$('#canvasImage${fieldName}').html('<img width="320" height="180" src="${file}" />');
+		$('#deleteButton${fieldName}').show();
+	};
+});
+</script>
+
 </#macro>
