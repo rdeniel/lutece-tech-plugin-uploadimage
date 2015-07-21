@@ -323,3 +323,12 @@ body {
 .docs-cropped .modal-body > canvas {
   max-width: 100%;
 }
+
+.cssClass {
+	
+  width: 780px; 
+  height: 321.875px; 
+  left: 0px; 
+  top: 149.063px;
+  
+}  

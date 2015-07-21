@@ -2,6 +2,7 @@
 $(function () {
 
   'use strict';
+
   var console = window.console || { log: function () {} },
       $alert = $('.docs-alert'),
       $message = $alert.find('.message'),
@@ -140,29 +141,27 @@ $(function () {
         result = $image.cropper(data.method, data.option);
 
 	if(data.method === 'deleteImage'){
-	      $('#imagesrc${fieldName}').val( );
-	      $('#canvasImage${fieldName}').html('');
-	      $('#deleteButton${fieldName}').hide();
+	      var fieldName= data.option; 
+	      $('#imagesrc'+fieldName).val( );
+	      $('#canvasImage'+fieldName).html('');
+	      $('#deleteButton'+fieldName).hide();
 	      exit();
 	}
 		
         if (data.method === 'getCroppedCanvas') {
 		
-         // $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-
 		$('#imagesrc${fieldName}').val(result.toDataURL());
 		$('#canvasImage${fieldName}').html(result);
 		$('#deleteButton${fieldName}').show();
 		
-		//exit();
         }
-
+	
 	if (data.method === 'zoom' || data.method === 'rotate'
 	 || data.method === 'crop' || data.method === 'clear' 
 	 || data.method === 'setDragMode' || data.method === 'enable'
 	 || data.method === 'disable' || data.method === 'enable'
 	 || data.method === 'reset' || data.method === 'destroy') {
-		//exit();
+		
         }
 	
         if ($.isPlainObject(result) && $target) {
@@ -264,9 +263,26 @@ $(function () {
     // Tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
-  }());
+   //hide button
 
+  if(!options.rotatable){
+	$('#rotate_right').hide();
+	$('#rotate_left').hide();
+   };
+  if(!options.zoomable){
+	$('#zoom_in').hide();
+	$('#zoom_out').hide();
+   };
+  if(!options.movable){
+	$('#move').hide();
+   };
  
 
+  }());
+
+  
+ 
+   
 });
 
+ 

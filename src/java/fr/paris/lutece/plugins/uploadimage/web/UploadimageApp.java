@@ -58,7 +58,7 @@ import org.apache.commons.lang.StringUtils;
 @Controller( xpageName = "uploadimage" , pageTitleI18nKey = "uploadimage.xpage.uploadimage.pageTitle" , pagePathI18nKey = "uploadimage.xpage.uploadimage.pagePathLabel" )
 public class UploadimageApp extends MVCApplication
 {
-    private static final String TEMPLATE_XPAGE = "/skin/plugins/uploadimage/uploadimage.html";
+    private static final String TEMPLATE_XPAGE = "/skin/plugins/uploadimage/uploadimageXpage.html";
  // Templates
     private static final String TEMPLATE_MAIN_UPLOAD_IMAGE_JS = "skin/plugins/uploadimage/main.js";
     
@@ -78,7 +78,7 @@ public class UploadimageApp extends MVCApplication
     public XPage viewHome( HttpServletRequest request )
     {
     	Map<String, Object> model = new HashMap<String, Object>(  );
-    	model.put("main", getMainUploadJs(request));
+    //	model.put("main", getMainUploadJs(request));
         return getXPage( TEMPLATE_XPAGE, request.getLocale(  ), model );
     }
     
@@ -91,10 +91,13 @@ public class UploadimageApp extends MVCApplication
     	String strFieldname = request.getParameter(PARAMATER_FIELDNAME);
     	Options option= new Options( );
     	
- 	   if(strFieldname != null){
+ 	   if(strFieldname != null && !strFieldname.isEmpty( )){
  		   option=OptionsHome.findByFieldName(strFieldname);  
  	   }else{
  		   option= getDefaultOption(	);
+ 	   }
+ 	   if(option == null ){
+ 		   option= getDefaultOption(  );
  	   }
    
     	 String strKey = "clef";

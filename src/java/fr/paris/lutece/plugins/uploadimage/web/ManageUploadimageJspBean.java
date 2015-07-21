@@ -234,10 +234,7 @@ public  class ManageUploadimageJspBean extends MVCAdminJspBean
 	   model.put("action", "modify_option");
 	   
 	   
-	   HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE_VIEW_OPTION, request.getLocale(  ),
-               model );
-	   
-	   return template.getHtml(  );
+	   return getManageUploadimageHome(request);
    }
   
    public String getViewOptions ( HttpServletRequest request ){
