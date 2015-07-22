@@ -285,4 +285,12 @@ $(function () {
    
 });
 
- 
+function zoomIn(fieldName) {
+	var elem = ".img-container" + fieldName;
+    $(elem+" > img").cropper("zoom",0.1);
+}
+
+function zoomOut(fieldName) {
+	var elem = ".img-container" + fieldName;
+    $(elem+" > img").cropper("zoom",-0.1);
+}
