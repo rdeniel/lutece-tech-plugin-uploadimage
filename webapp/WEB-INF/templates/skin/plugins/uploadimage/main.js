@@ -137,6 +137,7 @@ $(function () {
             }
           }
         }
+         
 
         result = $image.cropper(data.method, data.option);
 
@@ -153,17 +154,9 @@ $(function () {
 		$('#imagesrc${fieldName}').val(result.toDataURL());
 		$('#canvasImage${fieldName}').html(result);
 		$('#deleteButton${fieldName}').show();
-		
         }
 	
-	if (data.method === 'zoom' || data.method === 'rotate'
-	 || data.method === 'crop' || data.method === 'clear' 
-	 || data.method === 'setDragMode' || data.method === 'enable'
-	 || data.method === 'disable' || data.method === 'enable'
-	 || data.method === 'reset' || data.method === 'destroy') {
-		
-        }
-	
+
         if ($.isPlainObject(result) && $target) {
           try {
             $target.val(JSON.stringify(result));
@@ -203,13 +196,21 @@ $(function () {
 
     });
 
+     // zoom
+     var $zoom = $("zoom_in${fieldName}");
     
     // Import image
     var $inputImage = $('#inputImage${fieldName}'),
         URL = window.URL || window.webkitURL,
         blobURL;
+	
 
+	
+
+	
     if (URL) {
+
+
       $inputImage.change(function () {
 	
 	$('#label${fieldName}').hide();
@@ -286,11 +287,53 @@ $(function () {
 });
 
 function zoomIn(fieldName) {
-	var elem = ".img-container" + fieldName;
-    $(elem+" > img").cropper("zoom",0.1);
+    var element = ".img-container" + fieldName;
+    $(element+" > img").cropper("zoom",0.1);
 }
 
 function zoomOut(fieldName) {
-	var elem = ".img-container" + fieldName;
+    var elem = ".img-container" + fieldName;
     $(elem+" > img").cropper("zoom",-0.1);
 }
+
+function move(fieldName) {
+    var elem = ".img-container" + fieldName;
+    $(elem+" > img").cropper("setDragMode",'move');
+}
+function rotate(fieldName, deg) {
+    var elem = ".img-container" + fieldName;
+    $(elem+" > img").cropper("rotate",deg);
+}
+
+function cropBox(fieldName) {
+    var elem = ".img-container" + fieldName;
+    $(elem+" > img").cropper("crop");
+}
+
+function clearBox(fieldName) {
+    var elem = ".img-container" + fieldName;
+    $(elem+" > img").cropper("clear");
+}
+
+function resetBox(fieldName) {
+    var elem = ".img-container" + fieldName;
+    $(elem+" > img").cropper("reset");
+}
+
+function getCroppedCanva(fieldName){
+	var $element= $('.img-container'+fieldName+' > img');
+	result = $element.cropper('getCroppedCanvas', this.options);
+	$('#imagesrc'+fieldName).val(result.toDataURL());
+	$('#canvasImage'+fieldName).html(result);
+	$('#deleteButton'+fieldName).show();	
+};
+
+function  getCanvasWithParam(fieldName, param){
+	var $element= $('.img-container'+fieldName+' > img');
+	result = $element.cropper('getCroppedCanvas', param);
+	$('#imagesrc'+fieldName).val(result.toDataURL());
+	$('#canvasImage'+fieldName).html(result);
+	$('#deleteButton'+fieldName).show();	
+};
+
+
