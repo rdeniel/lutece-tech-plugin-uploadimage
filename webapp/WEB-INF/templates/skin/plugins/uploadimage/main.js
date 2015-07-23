@@ -1,8 +1,9 @@
+var paramaters${fieldName} = { width: ${option.width}, height: ${option.height} };
 
 $(function () {
 
   'use strict';
-
+  
   var console = window.console || { log: function () {} },
       $alert = $('.docs-alert'),
       $message = $alert.find('.message'),
@@ -73,8 +74,8 @@ $(function () {
          //  dragend: null,
          //  zoomin: null,
          //  zoomout: null,
-
-          aspectRatio: ${option.ratio},
+	
+          aspectRatio: ${option.ratio},	  
           preview: '.img-preview',
           crop: function (data) {
             $dataX.val(Math.round(data.x));
@@ -87,28 +88,28 @@ $(function () {
 
     $image.on({
       'build.cropper': function (e) {
-        console.log(e.type);
+        
       },
       'built.cropper': function (e) {
-        console.log(e.type);
+        
       },
       'dragstart.cropper': function (e) {
-        console.log(e.type, e.dragType);
+        
       },
       'dragmove.cropper': function (e) {
-        console.log(e.type, e.dragType);
+       
       },
       'dragend.cropper': function (e) {
-        console.log(e.type, e.dragType);
+       
       },
       'zoomin.cropper': function (e) {
-        console.log(e.type);
+     
       },
       'zoomout.cropper': function (e) {
-        console.log(e.type);
+  
       },
       'change.cropper': function (e) {
-        console.log(e.type);
+     
       }
     }).cropper(options);
 
@@ -133,7 +134,7 @@ $(function () {
             try {
               data.option = JSON.parse($target.val());
             } catch (e) {
-              console.log(e.message);
+              
             }
           }
         }
@@ -161,7 +162,7 @@ $(function () {
           try {
             $target.val(JSON.stringify(result));
           } catch (e) {
-            console.log(e.message);
+          
           }
         }
 
@@ -203,13 +204,8 @@ $(function () {
     var $inputImage = $('#inputImage${fieldName}'),
         URL = window.URL || window.webkitURL,
         blobURL;
-	
 
-	
-
-	
     if (URL) {
-
 
       $inputImage.change(function () {
 	
@@ -232,7 +228,7 @@ $(function () {
             $image.one('built.cropper', function () {
               URL.revokeObjectURL(blobURL); // Revoke when load complete
 		
-            }).cropper('reset').cropper('replace', blobURL);
+            }).cropper('reset').cropper('load', blobURL);
 	    
             $inputImage.val('');
           } else {
@@ -321,11 +317,13 @@ function resetBox(fieldName) {
 }
 
 function getCroppedCanva(fieldName){
+
 	var $element= $('.img-container'+fieldName+' > img');
-	result = $element.cropper('getCroppedCanvas', this.options);
+
+	result = $element.cropper('getCroppedCanvas', paramaters${fieldName});
 	$('#imagesrc'+fieldName).val(result.toDataURL());
-	$('#canvasImage'+fieldName).html(result);
-	$('#deleteButton'+fieldName).show();	
+	$('#canvasImage'+fieldName).html(result);	
+	$('#deleteButton'+fieldName).show();
 };
 
 function  getCanvasWithParam(fieldName, param){
