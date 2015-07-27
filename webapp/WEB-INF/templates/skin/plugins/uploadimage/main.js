@@ -147,7 +147,7 @@ $(function () {
 	      $('#imagesrc'+fieldName).val( );
 	      $('#canvasImage'+fieldName).html('');
 	      $('#deleteButton'+fieldName).hide();
-	      exit();
+	     
 	}
 		
         if (data.method === 'getCroppedCanvas') {
@@ -334,4 +334,9 @@ function  getCanvasWithParam(fieldName, param){
 	$('#deleteButton'+fieldName).show();	
 };
 
+function  deleteImage(fieldName){ 
+	      $('#imagesrc'+fieldName).val( );
+	      $('#canvasImage'+fieldName).html('');
+	      $('#deleteButton'+fieldName).hide();	
+};
 

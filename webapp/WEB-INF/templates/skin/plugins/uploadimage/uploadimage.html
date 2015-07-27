@@ -123,7 +123,7 @@
         </div>
 	<div class="row">
 		<input id="imagesrc${fieldName}" name="${fieldName}" type="hidden" value="" />	
-		<button id="deleteButton${fieldName}" class="btn btn-default" data-method="deleteImage" data-option="${fieldName}" type="button" title="#i18n{uploadimage.model.delete.button}" style="display:none">
+		<button id="deleteButton${fieldName}" class="btn btn-default" onClick="deleteImage('${fieldName}')" type="button" title="#i18n{uploadimage.model.delete.button}" style="display:none">
 		      <span class="glyphicon glyphicon-remove-circle"></span> #i18n{uploadimage.model.delete.button}
 		</button>
 		<div style="max-width: 5px;" id="canvasImage${fieldName}"></div>
