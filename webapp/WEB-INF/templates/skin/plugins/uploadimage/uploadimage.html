@@ -8,8 +8,8 @@
 
 
   <!-- Content -->
-  <div class="">
-    <div class="row">
+  <div id="content_upload_image"  class="">
+    <div id="row1"  class="row">
       <div class="col-xs-8 col-md-16">
         <!-- <h3 class="page-header">Demo:</h3> -->
 	 <label id="label${fieldName}" class="btn btn-primary btn-upload" for="inputImage${fieldName}" title="#i18n{uploadimage.model.title.upload}" <#if file !="" > style='display:none' </#if>>
@@ -18,11 +18,11 @@
               <span class="icon icon-upload"></span> #i18n{uploadimage.model.upload.button} 
             </span>
 	 </label>
-        <div class="img-container${fieldName} ${cssClass!}">
-          <image src="${file!}" alt="" class="">
+        <div id="img_div"  class="img-container${fieldName} ${cssClass!}">
+          <image id="img_file"  src="${file!}" alt="" class="">
         </div>
      </div>
-    <div class="row">
+    <div id="row2" class="row">
       <div id= "buttonOption${fieldName}" class="col-md-9 docs-buttons" <#if file =="" > style='display:none' </#if>>
         <!-- <h3 class="page-header">Toolbar:</h3> -->	
         <div id="buttonOption" class="btn-group" >
@@ -60,7 +60,7 @@
 
         </div>
 	
-        <div class="btn-group">
+        <div id="buttons" class="btn-group">
 
           <button id="crop" class="btn btn-primary" onClick="cropBox('${fieldName}')"  type="button" title="#i18n{uploadimage.model.title.crop}">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;crop&quot;)">
@@ -77,7 +77,7 @@
               <span class="icon icon-refresh"></span>
             </span>
           </button>
-          <label class="btn btn-primary" for="inputImage${fieldName}" title="#i18n{uploadimage.model.title.upload}">
+          <label id="upload"  class="btn btn-primary" for="inputImage${fieldName}" title="#i18n{uploadimage.model.title.upload}">
             <input class="sr-only" id="inputImage${fieldName}" name="file" type="file" accept="image/*">
             <span class="docs-tooltip" data-toggle="tooltip" title="#i18n{uploadimage.model.title.upload.tooltip}">
               <span class="icon icon-upload"></span> #i18n{uploadimage.model.upload.button}
@@ -104,8 +104,8 @@
           </button>
 	</div> -->
 
-        <div class="btn-group">
-          <button  class="btn btn-primary" onClick="getCroppedCanva('${fieldName}')" type="button">
+        <div id="crp_canvas" class="btn-group">
+          <button  id="crp_button_canvas" class="btn btn-primary" onClick="getCroppedCanva('${fieldName}')" type="button">
             <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper${fieldName}(&quot;getCroppedCanvas&quot;)">
               #i18n{uploadimage.model.get.cropped.canvas}
             </span>
@@ -121,7 +121,7 @@
             </span>
           </button> -->
         </div>
-	<div class="row">
+	<div id="row3" class="row">
 		<input id="imagesrc${fieldName}" name="${fieldName}" type="hidden" value="" />	
 		<button id="deleteButton${fieldName}" class="btn btn-default" onClick="deleteImage('${fieldName}')" type="button" title="#i18n{uploadimage.model.delete.button}" style="display:none">
 		      <span class="glyphicon glyphicon-remove-circle"></span> #i18n{uploadimage.model.delete.button}
