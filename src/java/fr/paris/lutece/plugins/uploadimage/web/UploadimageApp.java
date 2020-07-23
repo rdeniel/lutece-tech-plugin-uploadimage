@@ -79,7 +79,7 @@ public class UploadimageApp extends MVCApplication
     {
     	Map<String, Object> model = new HashMap<String, Object>(  );
     //	model.put("main", getMainUploadJs(request));
-        return getXPage( TEMPLATE_XPAGE, request.getLocale(  ), model );
+        return getXPage( TEMPLATE_XPAGE, getLocale( request ), model );
     }
     
     
@@ -112,7 +112,7 @@ public class UploadimageApp extends MVCApplication
 	    	 model.put("option", option);
 	    	 model.put(MARK_FIELDNAME, strFieldname);
 	    	 
-	         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MAIN_UPLOAD_IMAGE_JS, request.getLocale(  ),
+	         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MAIN_UPLOAD_IMAGE_JS, getLocale( request ),
 	                    model );
 	         strContent = template.getHtml(  );
 	      //      UploadImageCacheService.getInstance(  ).putInCache( strKey, strContent );
