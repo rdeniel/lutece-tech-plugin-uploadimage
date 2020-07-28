@@ -81,6 +81,7 @@ public class OptionsBusinessTest extends LuteceTestCase
     private final static int Y2 = 2;
     private final static String ROTATE1 = "Rotate1";
     private final static String ROTATE2 = "Rotate2";
+    private final static String FIELDNAME = "fieldName";
 
     public void testBusiness( )
     {
@@ -108,6 +109,7 @@ public class OptionsBusinessTest extends LuteceTestCase
         options.setX( X1 );
         options.setY( Y1 );
         options.setRatio( ROTATE1 );
+        options.setFieldName( FIELDNAME );
 
         // Create test
         OptionsHome.create( options );
